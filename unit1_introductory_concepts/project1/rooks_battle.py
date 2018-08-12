@@ -10,24 +10,7 @@ class Player(object):
     self.moved_piece=[]
     self.lost_pieces_count = 0
   
-    
-  def move_piece(self,x,y):
-    selected = [ piece for piece in self.pieces if piece == self.selected_piece ][0]
-    print("selected:",selected)
-    # selected = [x,y]
-    selected[0] = x
-    selected[1] = y
-    print("self.pieces",self.pieces)
-    self.selected_piece = []
-    self.moved_piece = [x,y]
-    pass
-  pass
 
-  # def remove_piece(self,removed_pieces):
-  #   pieces = self.pieces
-  #   for removed_piece in removed_pieces:
-  #     pieces.remove(removed_piece) if removed_piece in pieces else print("fail to remove",removed_piece)
-    
   
 class Computer(Player):
   def __init__(self):
@@ -59,14 +42,7 @@ class Board:
           data[i].append(" ")
     self.data = data
     
-    # for i in range(9):
-    #   for j in range(9):
-    #     if i == 0:
-    #       self.data[i][j] = computer.piece_label
-    #     elif i == 8:
-    #       self.data[i][j] = human.piece_label
-    #     else:
-    #       self.data[i][j] = " "
+
     
   def ask_user_select_point(self,symbol):
     x,y = -1,-1
@@ -111,7 +87,7 @@ class Board:
       return False
     player.selected_piece = [x,y]
     self.calc_reachable_places(x,y)
-    # self.calc()
+    
   
   def move_selected_piece(self,player,*point):
     if len(point) == 2 and point[0] and point[1]:
@@ -142,9 +118,8 @@ class Board:
     data[prev_x][prev_y] = " "
 
     # move the selected piece
-    # player.move_piece(x,y)
     data[x][y] = player.piece_label
-    print("selected_piece",player.selected_piece)
+    # print("selected_piece",player.selected_piece)
     player.moved_piece = [x,y]
     
     # reset reaachable_places
@@ -189,7 +164,7 @@ class Board:
         reachable.append([x,i])
       else:
         break
-    print(reachable)
+    # print(reachable)
     for p in reachable:
       [x,y] = p
       self.data[x][y] = "+"
@@ -263,8 +238,8 @@ class Board:
       removed_pieces.extend(tmp)
     capture_flag = False
     tmp = []
-    print("removed_pieces",removed_pieces) 
-    # defense.remove_piece(removed_pieces)
+    # print("removed_pieces",removed_pieces) 
+    
     defense.lost_pieces_count += len(removed_pieces)
     for p in removed_pieces:
       [x,y] = p
@@ -274,25 +249,8 @@ class Board:
     offense.moved_piece = []
 
 
-  # layout the all elements on the board
-  """
-  def calc(self):
-    data = self.data
-    computer = self.computer
-    human = self.human
-    # print(computer.pieces)
-    for i in range(9):
-      for j in range(9):
-        if [i,j] in computer.pieces:
-          data[i][j]="X"
-        elif [i,j] in human.pieces:
-          data[i][j]="Y"
-        elif [i,j] in self.reachable_places:
-          data[i][j]="+"
-        else:
-          data[i][j]=" "
-  """  
-    # print(data)
+
+
   
   # draw the board with elements
   def show(self):
@@ -359,98 +317,8 @@ class Match():
       print("You lost")
     
 
-
-    
-  
-  
-
 computer = Computer()
 human = Human()
 board = Board(computer,human)
 match = Match(board)
 match.start_match()
-# board.data[4][7] = "L"
-# board.show()
-# board.human.delete_piece(4)
-
-# board.select_piece(human,8,6)
-# board.show()
-# print("-----",human.selected_piece)
-# board.move_selected_piece(human,6,6)
-# board.show()
-
-# print(board.human.pieces)
-# board.calc_reachable_places(4,4)
-
-# board.select_piece(computer,0,6)
-# board.move_selected_piece(computer,6,6)
-
-# board.select_piece(computer,0,7)
-# board.move_selected_piece(computer,6,7)
-
-
-# board.select_piece(human,8,5)
-# # board.show()
-
-# board.move_selected_piece(human,6,5)
-# # print("before",computer.pieces)
-# board.show()
-
-# board.select_piece(human,8,8)
-# board.move_selected_piece(human,6,8)
-# board.check_captured_pieces(human,computer)
-
-# board.human.askUserToSelectPiece()
-# board.human.askUserMovingPosition()
-# board.show()
-# print("after",computer.pieces)
-# board.calc_reachable_places(8,2)
-# print(board.data)
-
-
-# print(human.pieces)
-# for i in range(0,5):
-#   print(i)
-
-# arr = [[8, 0], [8, 1], [8, 2], [8, 4], [8, 5], [8, 6], [8, 7], [8, 8]]
-# for [i,j] in arr:
-#   print("i: ",i," j:",j)
-
-# print([1,2] == [1,2] and 1 == 12 )
-
-# arr = [[8, 0], [8, 1], [8, 2], [8, 4], [8, 5], [8, 6], [8, 7], [8, 8]]
-# [x,y] = [8,8]
-# arr.remove([x,y]) if [x,y] in arr else 0
-# print(arr)
-
-# a = None
-# if a:
-#   print ("empty")
-# else:
-#   print("else")
-
-#input component
-"""
-flag = False
-while not flag:
-  position = input("enter the position ( x and y separated by a comma):").split(',')
-  if len(position)==2 and position[0] and position[1]:
-    x,y = position[0], position[1]
-    flag =True
-print("x,y : ",[x,y])
-"""
-
-# arr = [[1,2,3],[4,5,6],[7,8,9]]
-# # arr[1][2] = "★"
-# for i in range(3):
-#   arr[0][i] = "*"
-# print(arr)
-
-# arr #= [[" "] * 3] * 3
-
-# for i in range(3):
-#   arr[0][i] = "P"
-#   print(arr[0][i])
-#   # self.data[8][i] = human.piece_label
-# # print(arr[0])
-# print(arr)
