@@ -1,0 +1,1464 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Statistics-solutions}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Statistics}\label{statistics}
+
+As mentioned in the Probability lesson, Statistics is a closely related,
+yet distinct discipline from Probability. In Probability, we were
+primarily interested in examining mathematical properties of random
+variables, whereas here, we'll be often drawing inferences from
+real-world data that has been modeled using the language of probability.
+
+Data Science on the other hand, really ought to be considered a subfield
+of statistics. The distinction is really a bit of an accident, as Data
+Science was born out of Big Data in which the statistical details tend
+to become irrelevant. As a practicing Data Scientist, however, you must
+be comfortable with statistical concepts and jargon in order to read and
+understand the methods and literature in this field. In this notebook,
+we'll just go over the essentials, including:
+
+\begin{itemize}
+\tightlist
+\item
+  Hypothesis Testing
+\item
+  z-test
+\item
+  Student's t-test
+\item
+  Multiple Hypotheses
+\item
+  Parameter Estimation
+\item
+  Confidence Intervals
+\item
+  Bayesian Statistics
+\end{itemize}
+
+When formally studying statistics, you'll be frequently be asked to be
+\emph{extremely} careful about your assumptions, as the quality of your
+inferences is entirely dependent on the quality of your assumptions.
+This skill is something that the not statistically trained Data
+Scientist may not have often practiced, so when working through this
+section, always keep in mind what sort of assumptions you are making
+when applying a model to a phenomenon.
+
+    \subsection{Hypothesis Testing}\label{hypothesis-testing}
+
+Much of what lies in the domain of Classical Statistics falls under what
+is referred to as \emph{Hypothesis Testing}. In most contexts,
+hypothesis testing means asking if our observed data is an indication of
+some structure, or just due to chance alone. Is it a real effect or just
+a random fluke?
+
+Consider, for example, the question of whether or not a coin is fair.
+One way to think about this is to flip the coin many times, write down
+the results, and examine how closely it resembles the distribution of
+the fair coin. We can do just that with
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        
+        \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+        \PY{n}{X\PYZus{}fair} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{binomial}\PY{p}{(}\PY{n}{n} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{,} \PY{n}{p} \PY{o}{=} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{size} \PY{o}{=} \PY{l+m+mi}{1000}\PY{p}{)}
+        \PY{n}{X\PYZus{}unfair} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{binomial}\PY{p}{(}\PY{n}{n} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{,} \PY{n}{p} \PY{o}{=} \PY{l+m+mf}{0.75}\PY{p}{,} \PY{n}{size} \PY{o}{=} \PY{l+m+mi}{1000}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{X\PYZus{}fair}\PY{p}{,} \PY{n}{density} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,} \PY{n}{bins} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fair}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{X\PYZus{}unfair}\PY{p}{,} \PY{n}{density} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,} \PY{n}{bins} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Unfair}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{upper right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Coin Flips}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{n = 10, 5, samples = 1000}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of Sucesses}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Freq}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_2_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    We can see pretty quickly that the distributions are not the same, so if
+this came from real-world data, we could naively claim that the coin is
+probably unfair. However, to employ the power of statistics we need to
+quantify this intuition \emph{exactly}, and this is done by making a
+very subtle yet, distinct assumption. Namely, we do not ask "how likely
+is it that the coin is loaded given the data", but rather, "how likely
+is the data given that the coin is \textbf{not} loaded?". The latter
+assumption is called the \emph{null hypothesis} and represents the
+hypothesis we will be testing.
+
+The null hypothesis takes different forms in different contexts, but it
+always represents the assumption that no effect was observed: the
+medical treatment had no effect, reducing the speed limit did not reduce
+accidents, the coin is fair, etc... In our example above of a fair coin
+flip, in the logic of hypothesis testing, we must ask the question, how
+likely is the data given that the coin is fair?
+
+In a sequence of \(10\) flips, there are \(2^{10} = 1024\) possible
+outcomes, all equally likely. For a \emph{fair coin}, there is only one
+way to get \(10\) heads, and likewise, there are \(10\) ways to get
+\(9\) heads. We could likewise, compute this for all possible
+combinations. So if we flipped a coin 10 times, and got all heads, how
+likely is that observation from a fair coin? The computation is simply
+
+\[p = 1/1024 = 0.001\]
+
+Or about one in a thousand, meaning that the probability that our coin
+is fair is very low.
+
+Hypothesis testing in practice is a bit more complicated. To test a
+hypothesis from a given dataset, we need some number, or statistic, on
+which to test our hypothesis. Above the case was just the number of
+heads, but in practice, it is often the mean or some other bit of
+information which can be extracted from the data for which the
+distribution is known under the null hypothesis.
+
+Consider a distribution, of say, human heights in a well-fed population
+versus in a not well-fed population with the following data.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{X\PYZus{}fed} \PY{o}{=} \PY{l+m+mi}{7}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{l+m+mi}{10000}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{168}
+        \PY{n}{X\PYZus{}underfed} \PY{o}{=} \PY{l+m+mi}{7}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{l+m+mi}{10000}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{164}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{X\PYZus{}fed}\PY{p}{,} \PY{n}{density} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,} \PY{n}{bins} \PY{o}{=} \PY{l+m+mi}{100}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{X\PYZus{}underfed}\PY{p}{,} \PY{n}{density} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,} \PY{n}{bins} \PY{o}{=} \PY{l+m+mi}{100}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Underfed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{upper right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Height Distribution}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{Samples = 10000}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Height [cm]}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Freq}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_4_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    We can see that the distributions for each are slightly different, but
+what if we wanted to know how much different? One way to compute this
+would be to find how much overlap there is between the two.
+
+We can approach this problem with a couple of assumptions. - Heights are
+normally distributed which appears reasonable given the data. - If we
+assume they are normally distributed, then we can fit a normal
+distribution to each by computing the mean and variance.
+
+In practice, you may want to perform some tests on the data to validate
+the normality assumption, but we'll just take it as a given here.
+Computing the mean and variance of each yield.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{mean\PYZus{}fed} \PY{o}{=} \PY{n}{X\PYZus{}fed}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+        \PY{n}{mean\PYZus{}underfed} \PY{o}{=} \PY{n}{X\PYZus{}underfed}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+        \PY{n}{var\PYZus{}fed} \PY{o}{=} \PY{n}{X\PYZus{}fed}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{p}{)}
+        \PY{n}{var\PYZus{}underfed} \PY{o}{=} \PY{n}{X\PYZus{}underfed}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mean Fed: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{mean\PYZus{}fed}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Var Fed: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{var\PYZus{}fed}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mean Underfed: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{mean\PYZus{}underfed}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Var Underfed: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{var\PYZus{}underfed}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Mean Fed: 167.90097432153138
+Var Fed: 48.07583470572159
+Mean Underfed: 164.07896753942143
+Var Underfed: 48.24813678477664
+
+    \end{Verbatim}
+
+    We can see that the variances are close, but the mean is different. The
+question we are interested in is whether or not this difference in mean
+is statistically significant. To answer this question, we will assume a
+null hypothesis that the underfed data came from the same distribution
+as the fed data, since the fed population represents the population
+without the effect, and then compute the likelihood of observing that
+data.
+
+We first must fit a normal distribution to each of the populations using
+the mean and variance computed above, yielding.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{import} \PY{n}{norm}
+        \PY{c+c1}{\PYZsh{} Fit normals}
+        \PY{n}{fed\PYZus{}norm} \PY{o}{=} \PY{n}{norm}\PY{p}{(}\PY{n}{loc} \PY{o}{=} \PY{n}{mean\PYZus{}fed}\PY{p}{,} \PY{n}{scale} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{var\PYZus{}fed}\PY{p}{)}\PY{p}{)}
+        \PY{n}{underfed\PYZus{}norm} \PY{o}{=} \PY{n}{norm}\PY{p}{(}\PY{n}{loc} \PY{o}{=} \PY{n}{mean\PYZus{}underfed}\PY{p}{,} \PY{n}{scale} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{var\PYZus{}underfed}\PY{p}{)}\PY{p}{)}
+        
+        
+        \PY{n}{X\PYZus{}n\PYZus{}fed} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{n}{fed\PYZus{}norm}\PY{o}{.}\PY{n}{ppf}\PY{p}{(}\PY{l+m+mf}{0.01}\PY{p}{)}\PY{p}{,} \PY{n}{fed\PYZus{}norm}\PY{o}{.}\PY{n}{ppf}\PY{p}{(}\PY{l+m+mf}{0.99}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}
+        \PY{n}{X\PYZus{}n\PYZus{}underfed} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{n}{underfed\PYZus{}norm}\PY{o}{.}\PY{n}{ppf}\PY{p}{(}\PY{l+m+mf}{0.01}\PY{p}{)}\PY{p}{,} \PY{n}{underfed\PYZus{}norm}\PY{o}{.}\PY{n}{ppf}\PY{p}{(}\PY{l+m+mf}{0.99}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{X\PYZus{}n\PYZus{}fed}\PY{p}{,} \PY{n}{fed\PYZus{}norm}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{X\PYZus{}n\PYZus{}fed}\PY{p}{)}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{X\PYZus{}n\PYZus{}underfed}\PY{p}{,} \PY{n}{underfed\PYZus{}norm}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{X\PYZus{}n\PYZus{}underfed}\PY{p}{)}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Underfed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{X\PYZus{}fed}\PY{p}{,} \PY{n}{density} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,} \PY{n}{bins} \PY{o}{=} \PY{l+m+mi}{100}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{X\PYZus{}underfed}\PY{p}{,} \PY{n}{density} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,} \PY{n}{bins} \PY{o}{=} \PY{l+m+mi}{100}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fitted Normals}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f(X)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{upper right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_8_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    As can be seen, the normal curves fitted to the data approximate it
+well. Now as stated before, hypothesis testing is done by selecting a
+test statistic. In our case, we are interested in whether or not
+malnourishment has a measurable effect on human height. This is
+equivalent to asking whether or not the difference in mean between the
+two population is significant, and, as it turns out, the mean of heights
+(or any random variable for that matter) follows a normal distribution,
+making it a great candidate since it is both calculable from the data
+and the distribution is known.
+
+As with all hypothesis testing, we must ask ourselves the likelihood of
+the data, given the null hypothesis. To test this, we need a test
+statistic, and here we will use the \texttt{Z-Score} which can be
+computed as follows
+
+\[Z = \frac{x - \mu}{\sigma}\]
+
+where \(x\) is our data point, \(\mu\) is the mean as computed from the
+data, \(\sigma\) is the standard deviation. Doing so to our data,
+"scales" it so that it has mean 0 and variance 1. This is a very common
+procedure throughout Data Science as many machine learning algorithms
+either require or perform better with Z-scaled data. This can be done in
+\texttt{python} by
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{import} \PY{n}{zscore}
+        \PY{n}{z\PYZus{}scores} \PY{o}{=} \PY{n}{zscore}\PY{p}{(}\PY{n}{X\PYZus{}fed}\PY{p}{)}
+\end{Verbatim}
+
+
+    NOTE: There are two subtleties in the problem statement that should be
+noted.
+
+In calculating the standard error of the mean of the \emph{difference}
+\(X_f - X_u\), the variance of both distributions must contribute
+additively:
+
+\[ SE = \sqrt{\frac{\sigma_f^2}{n_f} + \frac{\sigma_u^2}{n_u}} = \sqrt{\frac{2}{n}} \cdot \sigma \]
+
+where, in this case, \(\sigma \equiv \sigma_f^2 = \sigma_u^2\) and
+\(n \equiv n_f = n_u\). The packaged statistical tests will take care of
+this transparently, but we have to be careful with the propagation of
+variances if we are using descriptive statistics to perform a test.
+
+    But since we will be testing the mean, we need to use the standard error
+of the mean given by
+
+\[SE = \frac{\sigma}{\sqrt{n}}\]
+
+where \(\sigma\) is the standard deviation and \(n\) is the number of
+data points.
+
+What we are interested in here is the \emph{difference} between the
+means of the two populations. Our Null Hypothesis is that this
+difference is 0 or
+
+\[H_0: \mu_f - \mu_u = 0 \\
+H_1: \mu_f - \mu_u > 0\]
+
+where \(H_0, H_1\) are our null and alternative hypothesis respectively,
+and likewise for the means denoted \(\mu_f, \mu_u\) for the fed and
+underfed populations. The question now becomes, is this difference
+statistically significant? We can answer this question by asking
+\emph{how likely is it to obtain a mean of \(\mu_u\) given the
+distribution of the fed population?}. Computing this is straight-forward
+-\/- we simply compute the \texttt{Z-Score} of the difference and then
+compute the associated probability of obtaining this result.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{from} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{stats}\PY{n+nn}{.}\PY{n+nn}{weightstats} \PY{k}{import} \PY{n}{DescrStatsW}\PY{p}{,} \PY{n}{CompareMeans}
+        
+        \PY{n}{d1} \PY{o}{=} \PY{n}{DescrStatsW}\PY{p}{(}\PY{n}{X\PYZus{}fed}\PY{p}{)}
+        \PY{n}{d2} \PY{o}{=} \PY{n}{DescrStatsW}\PY{p}{(}\PY{n}{X\PYZus{}underfed}\PY{p}{)}
+        
+        \PY{n}{cm} \PY{o}{=} \PY{n}{CompareMeans}\PY{p}{(}\PY{n}{d1}\PY{p}{,} \PY{n}{d2}\PY{p}{)}
+        \PY{n}{cm}\PY{o}{.}\PY{n}{ztest\PYZus{}ind}\PY{p}{(}\PY{n}{alternative} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{two\PYZhy{}sided}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{usevar} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pooled}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{value} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+
+    The \texttt{p-value} we computed above is the probability of obtaining a
+\texttt{z-score} under the null hypothesis. This is often denoted
+\(\alpha\) in the literature and \emph{typically} for values less than
+0.05, we say that we can reject the null hypothesis. Note that 0.05 is
+somewhat arbitrary and you may find use cases in which a larger alpha is
+more appropriate. In our case, we have a \texttt{p-value} of less than
+0.05 and therefore will reject the null hypothesis
+
+    \subsubsection{Student's t-test}\label{students-t-test}
+
+What was demonstrated above is known as a \texttt{Z-test} since it makes
+use of the Z statistic. When working with real-world data, however, a
+statistician will often employ the Student's t-test for
+\href{https://en.wikipedia.org/wiki/Student\%27s_t-test}{various
+reasons}, and as such, in most situations, you may find yourself in as a
+Data Scientist, it is recommended that you do the same.
+
+The primary difference between the z-test and t-test is the underlying
+distribution. As stated before, hypothesis testing is done on statistics
+which are both easy to compute (most of the time) and whose distribution
+is known. For the z-test, the distribution was the Normal and for the
+t-test, it is the Student's t-distribution which looks very much like a
+normal except that it has a heavy tail and takes different parameters.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{import} \PY{n}{t}
+        \PY{n}{df} \PY{o}{=} \PY{l+m+mf}{2.74}
+        \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{n}{t}\PY{o}{.}\PY{n}{ppf}\PY{p}{(}\PY{l+m+mf}{0.001}\PY{p}{,} \PY{n}{df}\PY{p}{)}\PY{p}{,}\PY{n}{t}\PY{o}{.}\PY{n}{ppf}\PY{p}{(}\PY{l+m+mf}{0.999}\PY{p}{,} \PY{n}{df}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{t}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{df}\PY{p}{)}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{lw}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.6}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t pdf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Student}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s t\PYZhy{}distribution}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f(X)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    When making use of both the t-test and z-test we must keep in mind that
+one of the assumptions is that the variance of the null and alternative
+hypotheses. There are ways around this assumption for which there are
+many alternatives in \texttt{scipy}, but we will continue to operate as
+if they are equal.
+
+Performing a t-test is very easy, and can be done with the above data by
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{import} \PY{n}{ttest\PYZus{}ind}
+        \PY{n}{t\PYZus{}stat}\PY{p}{,} \PY{n}{p\PYZus{}value} \PY{o}{=} \PY{n}{ttest\PYZus{}ind}\PY{p}{(}\PY{n}{X\PYZus{}fed}\PY{p}{,} \PY{n}{X\PYZus{}underfed}\PY{p}{,} \PY{n}{equal\PYZus{}var} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t\PYZhy{}statistic: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{t\PYZus{}stat}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{p\PYZhy{}value: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{p\PYZus{}value}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+t-statistic: 38.94059179014731
+p-value: 0.0
+
+    \end{Verbatim}
+
+    results of a t-test are intepreted the same as for the z-test -\/- a low
+p-value indicates that the null hypothesis can be rejected.
+
+    \textbf{Create a sample data set in which the means are very close and
+perform a z-test and t-test. Are the results similar?}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} Create sample data}
+         \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{X\PYZus{}1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{l+m+mi}{10000}\PY{p}{)}
+         \PY{n}{X\PYZus{}2} \PY{o}{=} \PY{n}{X\PYZus{}1} \PY{o}{+} \PY{l+m+mf}{0.025}
+         
+         \PY{c+c1}{\PYZsh{} z\PYZhy{}test}
+         \PY{n}{se} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{X\PYZus{}1}\PY{p}{)}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X\PYZus{}1}\PY{p}{)}\PY{p}{)}
+         \PY{n}{z\PYZus{}score} \PY{o}{=} \PY{p}{(}\PY{n}{X\PYZus{}1}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{X\PYZus{}2}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n}{se}
+         \PY{n}{p\PYZus{}value} \PY{o}{=} \PY{n}{norm}\PY{o}{.}\PY{n}{cdf}\PY{p}{(}\PY{n}{z\PYZus{}score}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Z\PYZhy{}Score: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{z\PYZus{}score}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{p\PYZhy{}value: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{p\PYZus{}value}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Z-Score: -2.5315005545628124
+p-value: 0.005678781892184168
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{} t\PYZhy{}test}
+         \PY{n}{t\PYZus{}stat}\PY{p}{,} \PY{n}{p\PYZus{}value} \PY{o}{=} \PY{n}{ttest\PYZus{}ind}\PY{p}{(}\PY{n}{X\PYZus{}1}\PY{p}{,} \PY{n}{X\PYZus{}2}\PY{p}{,} \PY{n}{equal\PYZus{}var} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Z\PYZhy{}Score: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{t\PYZus{}stat}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{p\PYZhy{}value: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{p\PYZus{}value}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Z-Score: -1.7899517044107716
+p-value: 0.07347679977986502
+
+    \end{Verbatim}
+
+    \emph{The results are somewhat similar, but for these particular values,
+we find that with one test we reject the null hypothesis with a p-value
+of less than 0.05 whereas for the t-test we fail to reject due to a
+p-value of greater than 0.5.}
+
+    \subsection{Parameter Estimation}\label{parameter-estimation}
+
+The next topic to cover is something we have actually touched on
+previously without rigorously explaining. As you may have noticed
+before, when we computed our mean and variance above, we were actually
+only making estimates. It is then from these estimates that we can fit a
+normal distribution or whatever else is needed.
+
+It is impossible, for example, to determine the "real" mean human height
+(or any random variable for that matter), but we assume that it exists
+and we estimate accordingly. These estimates are made by sampling from
+the population and computing the mean using
+
+\[\hat{\mu} = \frac{1}{N}\sum{x_i}\]
+
+Note that the "hat" denotes an estimated parameter and is seen
+throughout the statistics literature. Now suppose that we took another
+same size sample from the population and again estimated the mean. Our
+new value would be slightly different than the previous, indicating that
+our parameter estimates themselves have associated probability
+distributions.
+
+We may then be interested in asking, how accurate is our estimate to the
+"true" mean? There are a few ways to approach this, but here we will
+just touch on the two that come up frequently in Data Science, namely
+
+\begin{itemize}
+\tightlist
+\item
+  Consistency: An estimator \(\hat{\mu}\) is "consistent" if it tends to
+  approach the true value as the sample size increases.
+\item
+  Bias: An estimated \(\hat{\mu}\) is "unbiased" if
+  \(E[\hat{\mu}] = \alpha\) where a \(\alpha\) is the true value. In
+  other words, if the mean value of the estimator is equal to the actual
+  mean, then our estimator is unbiased.
+\end{itemize}
+
+Computing whether your estimator is consistent or unbiased is a
+mathematical exercise which you would explore in a formal statistics
+course. But just for reference here, the estimates for the mean and
+variance of a sample given by
+
+\[\hat{\mu} = \frac{1}{N}\sum{x_i}\]
+\[\hat{\sigma} = \frac{1}{N}\sum{(x_i - \hat{\mu})^2}\]
+
+and are both consistent. However, the estimate for the variance
+\emph{is} biased, as it can be shown to underestimate the true variance.
+The correction for this is not very intuitive and is often demonstrated
+mathematically which we will omit. In short, it occurs because we must
+use the least squares estimate for the mean which "costs" us one degree
+of freedom. The unbiased correction is then
+
+\[\hat{\sigma} = \frac{1}{N - 1}\sum{(x_i - \hat{\mu})^2}\]
+
+Note that when working with most software packages, this will all be
+done for you under the hood, but it is good to understand that this is
+actually happening.
+
+    \textbf{Demonstrate that the sample variance as defined above is, in
+fact, a biased estimator by generating a random data set.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} Function to compute mean}
+         \PY{k}{def} \PY{n+nf}{get\PYZus{}mean}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{:}
+             \PY{n}{total} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{X}\PY{p}{:}
+                 \PY{n}{total} \PY{o}{+}\PY{o}{=} \PY{n}{x}
+             \PY{n}{mean} \PY{o}{=} \PY{n}{total}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+             \PY{k}{return} \PY{n}{mean}
+         
+         \PY{k}{def} \PY{n+nf}{get\PYZus{}var}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{mean}\PY{p}{,} \PY{n}{biased} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{p}{:}
+             \PY{n}{total} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{X}\PY{p}{:}
+                 \PY{n}{total} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{x} \PY{o}{\PYZhy{}} \PY{n}{mean}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+                 
+             \PY{k}{if} \PY{n}{biased}\PY{p}{:}
+                 \PY{n}{var} \PY{o}{=} \PY{n}{total}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{var} \PY{o}{=} \PY{n}{total}\PY{o}{/}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)}
+             \PY{k}{return} \PY{n}{var}
+         
+         \PY{c+c1}{\PYZsh{} Generate data from a normal with mean 0 and variance 1}
+         \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{X} \PY{o}{=} \PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{5000}\PY{p}{)}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Compute sample mean and variance}
+         \PY{n}{X\PYZus{}means} \PY{o}{=} \PY{p}{[}\PY{n}{get\PYZus{}mean}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{X}\PY{p}{]}
+         \PY{n}{X\PYZus{}vars} \PY{o}{=} \PY{p}{[}\PY{n}{get\PYZus{}var}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{mu}\PY{p}{,} \PY{n}{biased} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)} \PY{k}{for} \PY{n}{x}\PY{p}{,} \PY{n}{mu} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{X\PYZus{}means}\PY{p}{)}\PY{p}{]}
+         \PY{n}{X\PYZus{}vars\PYZus{}un} \PY{o}{=} \PY{p}{[}\PY{n}{get\PYZus{}var}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{mu}\PY{p}{,} \PY{n}{biased} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)} \PY{k}{for} \PY{n}{x}\PY{p}{,} \PY{n}{mu} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{X\PYZus{}means}\PY{p}{)}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Calculate moving mean of both estimators}
+         \PY{n}{X\PYZus{}means\PYZus{}mov} \PY{o}{=} \PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{X\PYZus{}means}\PY{p}{[}\PY{p}{:}\PY{n}{n}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{X\PYZus{}means}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+         \PY{n}{X\PYZus{}vars\PYZus{}mov} \PY{o}{=} \PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{X\PYZus{}vars}\PY{p}{[}\PY{p}{:}\PY{n}{n}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{X\PYZus{}vars}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+         \PY{n}{X\PYZus{}vars\PYZus{}un\PYZus{}mov} \PY{o}{=} \PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{X\PYZus{}vars\PYZus{}un}\PY{p}{[}\PY{p}{:}\PY{n}{n}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{X\PYZus{}vars\PYZus{}un}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} Plot moving mean}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{200}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{X\PYZus{}means\PYZus{}mov}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{X\PYZus{}means\PYZus{}mov}\PY{p}{[}\PY{l+m+mi}{200}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sample Mean versus N Samples}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{True Mean = 0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{} Plot biased variance}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{200}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{X\PYZus{}vars\PYZus{}mov}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{X\PYZus{}vars\PYZus{}mov}\PY{p}{[}\PY{l+m+mi}{200}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sample Variance versus N Samples}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{True Variance = 1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{} Plot unbiased variance}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{200}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{X\PYZus{}vars\PYZus{}un\PYZus{}mov}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{X\PYZus{}vars\PYZus{}un\PYZus{}mov}\PY{p}{[}\PY{l+m+mi}{200}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sample Variance versus N Samples}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{True Variance = 1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_29_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \emph{It appears that the mean has zeroed in on the true value whereas
+the variance is a bit below it.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{N = 100}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X Mean Estimator: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{X\PYZus{}means}\PY{p}{[}\PY{l+m+mi}{98}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X Variance Biased Estimator: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{X\PYZus{}vars}\PY{p}{[}\PY{l+m+mi}{98}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X Variance Unbiased Estimator: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{X\PYZus{}vars\PYZus{}un}\PY{p}{[}\PY{l+m+mi}{98}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+N = 100
+X Mean Estimator: 0.0804947719616566
+X Variance Biased Estimator: 0.9285372045420686
+X Variance Unbiased Estimator: 0.9379163682243116
+
+    \end{Verbatim}
+
+    \emph{Again, after 100 samples, we can see a difference between the
+biased and unbiased estimators.}
+
+    \subsubsection{Linear Regression}\label{linear-regression}
+
+A topic we will touch on briefly in the context of parameter estimation
+is \emph{linear regression}. Suppose you have a dataset as follows.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{} Generate data}
+         \PY{n}{x} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{10} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{random}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{10}
+         \PY{n}{y} \PY{o}{=} \PY{p}{(}\PY{l+m+mf}{0.1}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}\PY{o}{*}\PY{n}{x} \PY{o}{+} \PY{p}{(}\PY{l+m+mf}{0.1}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Plot}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sample Data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Independent Variable}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Response}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_34_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    We can see that there is a general trend in our data of \(y\) increasing
+with increasing \(x\). In statistics, \(x\) is often referred to as your
+\emph{feature} or \emph{independent variable}, and \(y\) is called the
+\emph{dependent variable} or \emph{response}.
+
+A problem we are likely interested in answering is what is the
+relationship between the independent variable and response? The first
+approach to this problem may be to fit a straight line to the data of
+the form
+
+\[y = mx + b\]
+
+Or stated with the statistics conventions
+
+\[y = \beta_1 x_1 + \beta_0\]
+
+Where y is the response, \(x_1\) is our independent variable and
+\(\beta_1\) and \(\beta_0\) are our parameters. Just as above, our task
+here is to estimate these two parameters from the data. Additionally, we
+would like our parameters, if possible, to be both consistent and
+unbiased. We can approach this problem by considering the square
+residuals, or the square of the difference between our predicted data
+points from our model and the actual data point. Stated mathematically
+we need to minimize
+
+\[\sum{\epsilon}^2 = \sum{\left(y_i - \hat{\beta}_1 x_1 - \hat{\beta}_0\right)^2}\]
+
+There are numerous ways to solve this which we shall omit here and state
+only the result.
+
+\[\hat{\beta}_0 = \bar y - \hat{\beta}_1 \bar x\]
+
+\[\hat{\beta}_1 = \frac{ \sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y}) }{ \sum_{i=1}^n (x_i - \bar{x})^2 }\]
+
+Where \(\bar x\) and \(\bar y\) are the means of \(x\) and \(y\). The
+above unbiased estimator is known as the \emph{Least Squares Estimator}
+and although simple, it appears often when working with model building
+problems.
+
+Now that we can estimate the required parameters, we can fit a line to
+our data!
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{k+kn}{from} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{regression}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{OLS}
+         \PY{k+kn}{from} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{tools}\PY{n+nn}{.}\PY{n+nn}{tools} \PY{k}{import} \PY{n}{add\PYZus{}constant}
+         \PY{n}{lm} \PY{o}{=} \PY{n}{OLS}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{add\PYZus{}constant}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+         \PY{n}{results} \PY{o}{=} \PY{n}{lm}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{)}
+         \PY{n}{results}\PY{o}{.}\PY{n}{summary}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} <class 'statsmodels.iolib.summary.Summary'>
+         """
+                                     OLS Regression Results                            
+         ==============================================================================
+         Dep. Variable:                      y   R-squared:                       0.963
+         Model:                            OLS   Adj. R-squared:                  0.962
+         Method:                 Least Squares   F-statistic:                     2516.
+         Date:                Sat, 24 Feb 2018   Prob (F-statistic):           1.09e-71
+         Time:                        12:51:57   Log-Likelihood:                -90.487
+         No. Observations:                 100   AIC:                             185.0
+         Df Residuals:                      98   BIC:                             190.2
+         Df Model:                           1                                         
+         Covariance Type:            nonrobust                                         
+         ==============================================================================
+                          coef    std err          t      P>|t|      [0.025      0.975]
+         ------------------------------------------------------------------------------
+         const          1.0540      0.119      8.869      0.000       0.818       1.290
+         x1             0.9988      0.020     50.156      0.000       0.959       1.038
+         ==============================================================================
+         Omnibus:                        1.782   Durbin-Watson:                   1.842
+         Prob(Omnibus):                  0.410   Jarque-Bera (JB):                1.218
+         Skew:                          -0.169   Prob(JB):                        0.544
+         Kurtosis:                       3.423   Cond. No.                         12.0
+         ==============================================================================
+         
+         Warnings:
+         [1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+         """
+\end{Verbatim}
+            
+    And plot it
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{y\PYZus{}fit} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{results}\PY{o}{.}\PY{n}{params} \PY{o}{*} \PY{n}{add\PYZus{}constant}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y\PYZus{}fit}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sample Data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Independent Variable}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Response}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_38_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Note that we had to add the constant term to our data before performing
+the regression as \texttt{statsmodels} does not do so automatically. The
+table is mostly statistics telling us the quality of our fit. Of
+interest is the R-Squared value, also called the Coefficient of
+Determination, which is a very naive way of telling us how well our data
+is fit. An R-Squared of 1 is a perfect fit and an R-Squared of 0 is no
+fit at all. What value of R-Squared is acceptable varies significantly
+from problem to problem and discipline to discipline so there is no real
+rule of thumb. Also of interest is the \texttt{std\ err}, or standard
+error, of each of our explanatory variables along with their associated
+\texttt{t} statistics and p-values. These, in short, tell you how likely
+it is that each of your variables is important to your model, accepting
+only those with small p-values.
+
+    \textbf{Fit a linear regression model to the data below and comment on
+your results.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{)}
+         \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{rand}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{c+c1}{\PYZsh{} Plot}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sample Data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Independent Variable}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Response}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_42_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{} Fit a regression model}
+         \PY{n}{lm} \PY{o}{=} \PY{n}{OLS}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{add\PYZus{}constant}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)}
+         \PY{n}{results} \PY{o}{=} \PY{n}{lm}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{p}{)}
+         \PY{n}{results}\PY{o}{.}\PY{n}{summary}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:} <class 'statsmodels.iolib.summary.Summary'>
+         """
+                                     OLS Regression Results                            
+         ==============================================================================
+         Dep. Variable:                      y   R-squared:                       0.004
+         Model:                            OLS   Adj. R-squared:                 -0.006
+         Method:                 Least Squares   F-statistic:                    0.4302
+         Date:                Sat, 24 Feb 2018   Prob (F-statistic):              0.513
+         Time:                        12:51:57   Log-Likelihood:                -13.196
+         No. Observations:                 100   AIC:                             30.39
+         Df Residuals:                      98   BIC:                             35.60
+         Df Model:                           1                                         
+         Covariance Type:            nonrobust                                         
+         ==============================================================================
+                          coef    std err          t      P>|t|      [0.025      0.975]
+         ------------------------------------------------------------------------------
+         const          0.5581      0.054     10.417      0.000       0.452       0.664
+         x1            -0.0634      0.097     -0.656      0.513      -0.255       0.129
+         ==============================================================================
+         Omnibus:                       19.276   Durbin-Watson:                   2.031
+         Prob(Omnibus):                  0.000   Jarque-Bera (JB):                5.354
+         Skew:                          -0.191   Prob(JB):                       0.0688
+         Kurtosis:                       1.933   Cond. No.                         4.30
+         ==============================================================================
+         
+         Warnings:
+         [1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+         """
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{} And plot}
+         \PY{n}{y\PYZus{}fit} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{results}\PY{o}{.}\PY{n}{params} \PY{o}{*} \PY{n}{add\PYZus{}constant}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y\PYZus{}fit}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sample Data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Independent Variable}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Response}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_44_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Our fit here is pretty bad considering the low R-Squared value, p-value
+of the t statistic, and by visual inspection. Since our data was
+fundamentally random with no structure, this is exactly what we should
+expect.
+
+    \subsection{Confidence Intervals}\label{confidence-intervals}
+
+As has been said before, estimators are only estimates of the "true"
+value, and as such, we would like to be able to say something about the
+probability that the true value is within some interval. Most commonly,
+confidence intervals are found in mean calculations such as
+\(\hat{\mu} = 1.3 \pm 0.2\) where \(1.3\) is the computed mean and
+\(0.2\) is a confidence interval referred to as the standard error of
+the mean (\emph{SEM}). We can compute the \emph{SEM} by
+
+\[SEM = \frac{\sigma}{\sqrt{n}}\]
+
+where \(\sigma\) is the population mean, and \(n\) is the number of
+samples. There are also built-in python functions to do the same
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{import} \PY{n}{sem}
+         \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{l+m+mi}{1000}\PY{p}{)}
+         \PY{n}{X\PYZus{}mean} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{n}{X\PYZus{}sem} \PY{o}{=} \PY{n}{sem}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mean X: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{X\PYZus{}mean}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ +/\PYZhy{} }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{X\PYZus{}sem}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Mean X: 0.004379028822487808 +/- 0.031083263432154753
+
+    \end{Verbatim}
+
+    Which tells us that there is an \(z\) significance that the true mean
+lies on the interval given by
+
+\[[\hat{\mu}-z*SEM, \hat{\mu}+z*SEM]\]
+
+Where the \(z\) (sometimes denoted \(\alpha\)) represents the
+significance level and can be looked up in a z-score table. Often 95\%
+confidence is used which corresponds to \(z = 1.96\).
+
+As was emphasized at the beginning of this notebook, statisticians must
+always be very careful with their assumptions. When building a
+confidence interval, we are essentially assuming that our mean is
+normally distributed, which by the mean value theorem is not a bad
+assumption given a large amount of data, and then computing the range
+over which the "middle" 95\% of the resulting normal distribution lies.
+Graphically this is
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{n}{norm}\PY{o}{.}\PY{n}{ppf}\PY{p}{(}\PY{l+m+mf}{0.0001}\PY{p}{)}\PY{p}{,} \PY{n}{norm}\PY{o}{.}\PY{n}{ppf}\PY{p}{(}\PY{l+m+mf}{0.9999}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}
+         \PY{n}{X\PYZus{}fill} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{1.96}\PY{p}{,} \PY{l+m+mf}{1.96}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{norm}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{fill\PYZus{}between}\PY{p}{(}\PY{n}{X\PYZus{}fill}\PY{p}{,} \PY{n}{norm}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{X\PYZus{}fill}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Standard Normal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f(X)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_49_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Where the shaded region represents the 95\% confidence interval of the
+mean centered at \(x = 0\) and variance standardized to \(\sigma = 1\).
+We can compute the confidence interval with
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{norm}\PY{o}{.}\PY{n}{interval}\PY{p}{(}\PY{l+m+mf}{0.95}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}32}]:} (-1.959963984540054, 1.959963984540054)
+\end{Verbatim}
+            
+    Which shows us the interval for the standard normal.
+
+    \textbf{Compute the 98\% confidence interval for the mean of a randomly
+generated dataset of mean not equal to 0, using the functions above,
+verifying by hand.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}91}]:} \PY{c+c1}{\PYZsh{} Generate random data}
+         \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{l+m+mi}{1000}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{25}
+         \PY{n}{X\PYZus{}mean} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{n}{X\PYZus{}sem} \PY{o}{=} \PY{n}{sem}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Compute 98\PYZpc{} C.I.}
+         \PY{n}{norm}\PY{o}{.}\PY{n}{interval}\PY{p}{(}\PY{l+m+mf}{0.98}\PY{p}{,} \PY{n}{loc} \PY{o}{=} \PY{n}{X\PYZus{}mean}\PY{p}{,} \PY{n}{scale} \PY{o}{=} \PY{n}{X\PYZus{}sem}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}91}]:} (24.88209529349801, 25.027391291521596)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}92}]:} \PY{c+c1}{\PYZsh{} Now By hand}
+         \PY{n}{X\PYZus{}std} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{p}{)}
+         \PY{n}{X\PYZus{}sem} \PY{o}{=} \PY{n}{X\PYZus{}std}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)}
+         \PY{p}{(}\PY{n}{X\PYZus{}mean} \PY{o}{\PYZhy{}} \PY{l+m+mf}{2.326}\PY{o}{*}\PY{n}{X\PYZus{}sem}\PY{p}{,} \PY{n}{X\PYZus{}mean} \PY{o}{+} \PY{l+m+mf}{2.326}\PY{o}{*}\PY{n}{X\PYZus{}sem}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}92}]:} (24.88214248468125, 25.027344100338357)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1.76405235 0.40015721]
+
+    \end{Verbatim}
+
+    \subsection{Bayesian Statistics}\label{bayesian-statistics}
+
+The final topic we'll cover here is perhaps one of the most useful to
+you as a Data Scientist. What we have seen up to this point is typically
+called "Frequentist" or "Classical" Statistics and what we will examine
+here is a bit of a different approach, namely, Bayesian Statistics. In
+terms of final predictions, they differ very little on a large enough
+scale, but in their initial approach to the same problem, the
+consequences of their philosophical differences become very clear.
+
+At the lowest level, the difference manifests itself in the
+interpretation of probability. The Frequentist approach says that if we
+were to arrange a large number of identically prepared systems and count
+some outcome, then the frequency of that outcome is what we mean by
+probability, whereas under the Bayesian interpretation, the probability
+is more of a measure of our ignorance about the phenomenon.
+
+In practice, this means when using the classical approach, we will do
+things like computing the best fit parameter given the data and some
+confidence intervals, but with Bayesian, we will use our prior knowledge
+of the system to specify the probability of the unknown parameter's
+distribution, updating this distribution as more data comes in. The
+basis of this idea comes from what is known as Bayes' Theorem
+
+\[P(A\mid B) = \frac{P(B \mid A) \, P(A)}{P(B)}\]
+
+defined as follows: - \(P(A\mid B)\): The probability distribution of
+the unknown parameter \(A\), given data \(B\) - \(P(A)\): The "prior"
+distribution, or our confidence about \(A\) before the data. -
+\(P(B \mid A)\): The likelihood of the data given a value of the
+parameter. This is often the tricky part in Bayesian statistics but can
+often be calculated. - \(P(B)\): The probability of the data given all
+values of the parameter.
+
+The idea is that we start with a prior assumption about the parameter
+distribution, like it being distributed uniformly if we are completely
+ignorant about it for example, and then as data comes in, we update the
+distribution by Bayes' Theorem, replacing \(P(A)\) with our new
+distribution, updating continually with more data.
+
+\subsubsection{Naive Assumption}\label{naive-assumption}
+
+As mentioned above, the most difficult part is often obtaining an
+expression for \(P(B \mid A)\) as the data \(B\) is often a random
+variable itself, depending on many different factors and
+interdependencies. For example, consider a data set which is word
+frequency texts in some document. It is known that certain words will
+appear very frequently and depend on each other and in order to fully
+calculate \(P(B \mid A)\) one would have to know each word's
+relationship with the parameter we are trying to calculate. As a way
+around this, we can employ a trick which has proved to be very effective
+despite the terrible statistical assumption, namely Naive Bayes in which
+we assume
+
+\[P(B \mid A) = P(B_0 \mid A)*P(B_1 \mid A)*\dots*P(B_n \mid A)\]
+
+Here we are assuming that each feature is independent so that we can
+compute the joint probability distribution by simply multiplying them
+all together.
+
+To demonstrate this consider that we are told to determine whether or
+not a particular person is male or female. Naively, we can set our prior
+to be 50/50 since that is approximately the distribution in the
+population. But then suppose that we are told that this person has long
+hair. How can we now update the probability? We are being asked to
+compute
+
+\[\begin{align}
+P(Female\mid Long Hair) &= \frac{P(Long Hair \mid Female) \, P(Female)}{P(Long Hair)} \\
+&= \frac{P(Long Hair \mid Female) \, \frac{1}{2}}{P(Long Hair)}
+\end{align}\]
+
+Now with just a little bit of knowledge regarding the portion of long
+hair in the population, as well as the portion of women who have long
+hair, we can compute what we are looking for.
+
+    \textbf{Assuming that about 80\% of women have long hair and that 15\%
+men do, compute the probability of selecting a female given that the
+person has long hair as above.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{P\PYZus{}lh\PYZus{}f} \PY{o}{=} \PY{l+m+mf}{0.8}
+        \PY{n}{P\PYZus{}lh} \PY{o}{=} \PY{p}{(}\PY{l+m+mf}{0.8}\PY{o}{+}\PY{l+m+mf}{0.15}\PY{p}{)}\PY{o}{*}\PY{l+m+mf}{0.5}
+        
+        \PY{n}{P\PYZus{}f\PYZus{}lh} \PY{o}{=} \PY{p}{(}\PY{l+m+mf}{0.5}\PY{p}{)}\PY{o}{*}\PY{n}{P\PYZus{}lh\PYZus{}f}\PY{o}{/}\PY{n}{P\PYZus{}lh}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{P(Female | LongHair) = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{P\PYZus{}f\PYZus{}lh}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+P(Female | LongHair) = 0.8421052631578947
+
+    \end{Verbatim}
+
+    \subsubsection{Prior and Posterior
+Distributions}\label{prior-and-posterior-distributions}
+
+The above example demonstrates the kind of reasoning involved with
+Bayesian Inference but doesn't really capture its true power. For that,
+we will need to introduce the idea of a \emph{posterior distribution}
+which is nothing more than our prior distribution updated via Bayes'
+Theorem. When performing real Bayesian Inference, one must be very
+careful in the choice of a prior, as some are "good" to work with while
+others are near impossible.
+
+Choosing a good prior essentially means choosing one for which computing
+the likelihood function is easy given the information available to use.
+The best cases are called \emph{conjugate priors} in which updating the
+prior to the posterior is a straight-forward calculation.
+
+To demonstrate this, consider the problem of determining the mean from a
+sample population for which the variance is known. Now we know by the
+mean value theorem, that with enough samples, the mean will be normally
+distributed. Under the Frequentist approach, we would start with an
+assumption, fit a normal distribution to the data, and compute some
+confidence intervals if we'd like. However, the Bayesian approach would
+be somewhat different. Let's assume that the parameter we want to
+estimate, \(\mu\) is normally distributed with known variance
+\(\sigma^2\). By
+\href{https://en.wikipedia.org/wiki/Conjugate_prior}{looking up a table
+of conjugate priors for the normal distribution}. When choosing a good
+prior, often Bayes' Theorem reduces to the much simpler form of
+
+\[P(A\mid B) = P(B \mid A) \, P(A)\]
+
+which can be updated sequentially. For the case of a normal prior, we
+see that it has the closed form solution
+
+\[\begin{align}
+E(\mu' \mid x) &= \frac{\sigma^2\mu + \sigma^2_0 x}{\sigma^2 + \sigma^2_0} \\[7pt]
+\mathrm{Var}(\mu' \mid x) &= \frac{\sigma^2 \sigma^2_0}{\sigma^2 + \sigma^2_0}
+\end{align}\]
+
+where \(\sigma_0\) is the known variance and all others are computed
+using the best parameters from the last update. Note that we must first
+make a "guess" for the initial choice of parameters with our prior.
+Results below for estimating the distribution of the standard normal
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{)}
+         \PY{n}{X\PYZus{}var} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{X\PYZus{}mean\PYZus{}i} \PY{o}{=} \PY{l+m+mi}{1}
+         \PY{n}{X\PYZus{}var\PYZus{}i} \PY{o}{=} \PY{l+m+mf}{0.5}
+         
+         \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{)}\PY{p}{:}
+             \PY{n}{X\PYZus{}mean\PYZus{}i} \PY{o}{=} \PY{p}{(}\PY{n}{X\PYZus{}var}\PY{o}{*}\PY{n}{X\PYZus{}mean\PYZus{}i} \PY{o}{+} \PY{n}{X\PYZus{}var\PYZus{}i}\PY{o}{*}\PY{n}{X}\PY{p}{[}\PY{n}{n}\PY{p}{]}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{n}{X\PYZus{}var\PYZus{}i} \PY{o}{+} \PY{n}{X\PYZus{}var}\PY{p}{)}
+             \PY{n}{X\PYZus{}var\PYZus{}i} \PY{o}{=} \PY{p}{(}\PY{n}{X\PYZus{}var\PYZus{}i}\PY{o}{*}\PY{n}{X\PYZus{}var}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{n}{X\PYZus{}var\PYZus{}i} \PY{o}{+} \PY{n}{X\PYZus{}var}\PY{p}{)}
+             
+             \PY{n}{norm\PYZus{}new} \PY{o}{=} \PY{n}{norm}\PY{p}{(}\PY{n}{loc} \PY{o}{=} \PY{n}{X\PYZus{}mean\PYZus{}i}\PY{p}{,} \PY{n}{scale} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{X\PYZus{}var\PYZus{}i}\PY{p}{)}\PY{p}{)}
+             
+             \PY{n}{X\PYZus{}line} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{n}{norm\PYZus{}new}\PY{o}{.}\PY{n}{ppf}\PY{p}{(}\PY{l+m+mf}{0.0001}\PY{p}{)}\PY{p}{,} \PY{n}{norm\PYZus{}new}\PY{o}{.}\PY{n}{ppf}\PY{p}{(}\PY{l+m+mf}{0.9999}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}
+             
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{X\PYZus{}line}\PY{p}{,} \PY{n}{norm\PYZus{}new}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{X\PYZus{}line}\PY{p}{)}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{New Normal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{X\PYZus{}line}\PY{p}{,} \PY{n}{norm}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{X\PYZus{}line}\PY{p}{)}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{True Normal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Standard Normal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f(X)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_61_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_61_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_61_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_61_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_61_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_61_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_61_6.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_61_7.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_61_8.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_61_9.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_61_10.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_61_11.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_61_12.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_61_13.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_61_14.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_61_15.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_61_16.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_61_17.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_61_18.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_61_19.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    As can be seen, the Bayesian estimate of the mean slowly moves toward
+the actual value as the number of samples increases. After enough time,
+the classical and Bayesian approaches will reach the same conclusion,
+but depending on your use case and field, one is often preferred to the
+other, and of course, in the broader context of Data Science, it is
+important to at least understand what is happening here in principle.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
